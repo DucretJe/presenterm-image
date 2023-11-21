@@ -8,7 +8,7 @@ Thanks to maaslalani for the work <3
 Create an alias:
 
 ```sh
-alias slide='docker run --rm --name slides -v `pwd`:/workdir -w /workdir -it slides'
+alias slide='docker run --rm --name slides -v `pwd`:/workdir -w /workdir -it ghcr.io/ducretje/slides-image'
 ```
 
 Run it:
