@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "mergeConfidence:all-badges",
+    "config:recommended"
   ],
   "packageRules": [
     {
@@ -14,8 +15,9 @@
       "automerge": true
     }
   ],
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": [
         "^docker/.*Dockerfile$"
       ],
@@ -25,6 +27,7 @@
       "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "^build/.*makefile$"
       ],
