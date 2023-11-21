@@ -15,13 +15,13 @@ all: build test
 # Build the Docker image
 build:
 	@docker buildx create --name multiarchbuilder --use && \
-	docker buildx build --platform linux/amd64,linux/arm64 -t $(IMAGE_NAME) $(DOCKERFILE_PATH)
-	@docker buildx rm multiarchbuilder
+	docker buildx build --load -t $(IMAGE_NAME):$(VERSION) $(DOCKERFILE_PATH) && \
+	docker buildx rm multiarchbuilder
 
 # Test the Docker image
 test: build
 	@{ \
-	docker run --rm $(IMAGE_NAME) help; \
+	docker run --rm $(IMAGE_NAME):$(VERSION) help; \
 	EXIT_CODE=$$?; \
 	if [ $$EXIT_CODE -eq 0 ]; then \
 		echo "\033[0;32mSuccess: The command executed successfully.\033[0m"; \
