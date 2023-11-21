@@ -1,9 +1,18 @@
-# Repository template
+# Slides Image
 
-## Features
+This repo builds a docker image of [slides](https://github.com/maaslalani/slides).
+Thanks to maaslalani for the work <3
 
-The repository is spawned with
+## How to
 
-* Renovate config file
-* Super Linter that runs on every push
-* Checkov that runs on PR or push on Main when in /terraform or workflow file
+Create an alias:
+
+```sh
+alias slide='docker run --rm --name slides -v `pwd`:/workdir -w /workdir -it slides'
+```
+
+Run it:
+
+```sh
+slide example.md
+```
