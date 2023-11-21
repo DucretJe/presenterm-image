@@ -32,7 +32,7 @@
         "^build/.*makefile$"
       ],
       "matchStrings": [
-        "VERSION :+ (?<currentValue>.*)"
+        "VERSION := (?<currentValue>.*)"
       ],
       "depNameTemplate": "maaslalani/slides",
       "datasourceTemplate": "github-releases"
