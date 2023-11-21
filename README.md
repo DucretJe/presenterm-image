@@ -1,6 +1,6 @@
 # Slides Image
 
-This repo builds a docker image of [slides](https://github.com/maaslalani/slides).
+This repository builds a docker image of [slides](https://github.com/maaslalani/slides).
 Thanks to maaslalani for the work <3
 
 ## How to
