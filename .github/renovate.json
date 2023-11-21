@@ -19,7 +19,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^docker/.*Dockerfile$"
+        "^docker/.*dockerfile$"
       ],
       "matchStrings": [
         "#*renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) versioning=(?<versioning>.*?)\nENV .*_VER (?<currentValue>.*?)\n"
