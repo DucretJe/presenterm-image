@@ -2,7 +2,7 @@
 VERSION := v0.9.0
 
 # Define the image name
-IMAGE_NAME := slides
+IMAGE_NAME := slides-image
 
 # Define the path to the Dockerfile
 DOCKERFILE_PATH := ../docker
