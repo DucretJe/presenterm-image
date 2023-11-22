@@ -19,3 +19,22 @@ Run it:
 ```sh
 slide example.md
 ```
+
+## Image support
+
+For now a basic image support is available (only `png`)
+Need to add
+
+# ```
+# ~~~chafa image.png
+# placeholder text
+# ~~~
+# ```
+
+May also have to use to make it work
+
+# ```
+# ~~~chafa --format symbols image.png
+# placeholder text
+# ~~~
+# ```
