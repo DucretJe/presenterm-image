@@ -18,6 +18,12 @@ RUN go build
 
 FROM alpine:3@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978 as slides
 
+# renovate: datasource=repology depName=alpine_3_18/chafa versioning=loose
+ENV CHAFA_VER 1.12.5
+
+RUN apk add --no-cache \
+    chafa~="${CHAFA_VER}"
+
 COPY --from=build /go/slides/slides /usr/local/bin/slides
 
 HEALTHCHECK NONE
