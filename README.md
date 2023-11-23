@@ -25,16 +25,20 @@ slide example.md
 For now a basic image support is available (only `png`)
 Need to add
 
-# ```
-# ~~~chafa image.png
-# placeholder text
-# ~~~
-# ```
+```
+#```
+#~~~chafa image.png
+#placeholder text
+#~~~
+#```
+```
 
 May also have to use to make it work
 
-# ```
-# ~~~chafa --format symbols image.png
-# placeholder text
-# ~~~
-# ```
+```
+#```
+#~~~chafa --format symbols image.png
+#placeholder text
+#~~~
+#```
+``````
