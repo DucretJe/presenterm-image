@@ -1,4 +1,4 @@
-FROM golang:bookworm@sha256:53048e8f87cb42d5dfb620423479e1acf2d178038c77c61b97ed5d4165e574dc as builder
+FROM golang:bookworm@sha256:03082deb6ae090a0caa4e4a8f666bc59715bc6fa67f5fd109f823a0c4e1efc2a as builder
 
 # renovate: datasource=repology depName=debian_12/git versioning=loose
 ENV GIT_VER 2.39.2
