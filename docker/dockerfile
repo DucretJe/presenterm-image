@@ -18,18 +18,19 @@ RUN dpkgArch="$(echo "$TARGETPLATFORM" | cut -d '/' -f2)" && \
     esac
 SHELL ["/bin/sh", "-c"]
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && apt-get install --no-install-recommends -y \
     ca-certificates=${CACERTIFICATES_VER} \
     "wget=${WGET_VER}*" && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN export ARCH=$(cat /tmp/arch) && \
+    rm -rf /var/lib/apt/lists/* && \
+    export ARCH=$(cat /tmp/arch) && \
     wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTERM_VER}/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" -O "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" && \
     wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTERM_VER}/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" -O "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" && \
-    cat "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" | sed "s|presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|" | sha512sum -c - && \
+    sed "s|presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|" "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" | sha512sum -c - && \
     tar -xf "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" -C /tmp/ && \
     mv "/tmp/presenterm-${PRESENTERM_VER#v}/presenterm" "/usr/bin/"
+SHELL ["/bin/sh", "-c"]
 
 FROM debian:bookworm@sha256:4482958b4461ff7d9fabc24b3a9ab1e9a2c85ece07b2db1840c7cbc01d053e90
 
