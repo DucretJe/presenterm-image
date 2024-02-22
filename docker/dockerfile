@@ -35,7 +35,15 @@ SHELL ["/bin/sh", "-c"]
 
 FROM debian:bookworm@sha256:4482958b4461ff7d9fabc24b3a9ab1e9a2c85ece07b2db1840c7cbc01d053e90
 
+# renovate: datasource=repology depName=debian_12/kitty versioning=loose
+ENV KITTY_VER 0.26.5
+
 COPY --from=builder /bin/presenterm /bin/presenterm
+
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    "kitty=${KITTY_VER}*" && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 USER nobody
 
