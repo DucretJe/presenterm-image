@@ -2,7 +2,7 @@ FROM debian:bookworm@sha256:4482958b4461ff7d9fabc24b3a9ab1e9a2c85ece07b2db1840c7
 ARG TARGETPLATFORM
 
 # Github releases
-ENV PRESENTTERM_VER v0.6.1
+ENV PRESENTERM_VER v0.6.1
 
 # renovate: datasource=repology depName=debian_12/ca-certificates versioning=loose
 ENV CACERTIFICATES_VER 20230311
@@ -25,11 +25,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     rm -rf /var/lib/apt/lists/*
 
 RUN export ARCH=$(cat /tmp/arch) && \
-    wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTTERM_VER}/presenterm-${PRESENTTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" -O "/tmp/presenterm-${PRESENTTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" && \
-    wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTTERM_VER}/presenterm-${PRESENTTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" -O "/tmp/presenterm-${PRESENTTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" && \
-    cat "/tmp/presenterm-${PRESENTTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" | sed "s|presenterm-${PRESENTTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|/tmp/presenterm-${PRESENTTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|" | sha512sum -c - && \
-    tar -xf "/tmp/presenterm-${PRESENTTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" -C /tmp/ && \
-    mv "/tmp/presenterm-${PRESENTTERM_VER#v}/presenterm" "/usr/bin/"
+    wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTERM_VER}/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" -O "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" && \
+    wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTERM_VER}/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" -O "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" && \
+    cat "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" | sed "s|presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|" | sha512sum -c - && \
+    tar -xf "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" -C /tmp/ && \
+    mv "/tmp/presenterm-${PRESENTERM_VER#v}/presenterm" "/usr/bin/"
 
 FROM debian:bookworm@sha256:4482958b4461ff7d9fabc24b3a9ab1e9a2c85ece07b2db1840c7cbc01d053e90
 

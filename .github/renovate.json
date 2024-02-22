@@ -43,7 +43,7 @@
         "^docker/.*dockerfile$"
       ],
       "matchStrings": [
-        "ENV PRESENTTERM_VER := (?<currentValue>.*)"
+        "ENV PRESENTERM_VER := (?<currentValue>.*)"
       ],
       "depNameTemplate": "mfontanini/presenterm",
       "datasourceTemplate": "github-releases"

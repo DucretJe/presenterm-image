@@ -43,5 +43,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/ducretje/slides-image:${{ env.VERSION }}
-            ghcr.io/ducretje/slides-image:latest
+            ghcr.io/ducretje/presenterm-image:${{ env.VERSION }}
+            ghcr.io/ducretje/presenterm-image:latest
