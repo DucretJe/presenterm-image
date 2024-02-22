@@ -1,44 +1,21 @@
-# Slides Image [![Push on Merge](https://github.com/DucretJe/slides-image/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/DucretJe/slides-image/actions/workflows/build.yaml) [![💫 Super-Linter](https://github.com/DucretJe/slides-image/actions/workflows/linter.yaml/badge.svg)](https://github.com/DucretJe/slides-image/actions/workflows/linter.yaml)
+# Presentterm Image [![Push on Merge](https://github.com/DucretJe/slides-image/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/DucretJe/slides-image/actions/workflows/build.yaml) [![💫 Super-Linter](https://github.com/DucretJe/slides-image/actions/workflows/linter.yaml/badge.svg)](https://github.com/DucretJe/slides-image/actions/workflows/linter.yaml)
 
 ![Cute Robot Demo](https://github.com/DucretJe/slides-image/assets/5384298/d2ad647c-f22a-437b-85e7-0da1c7ac2a01)
 
 
-This repository builds a docker image of [slides](https://github.com/maaslalani/slides).
-Thanks to maaslalani for the work <3
+This repository builds a docker image of [presentterm](https://github.com/mfontanini/presenterm/).
+Thanks to mfontanini for the work <3
 
 ## How to
 
 Create an alias:
 
 ```sh
-alias slide='docker run --rm --name slides -v `pwd`:/workdir -w /workdir -it ghcr.io/ducretje/slides-image'
+alias presenterm='docker run --rm --name presenterm -v `pwd`:/workdir -w /workdir -it ghcr.io/ducretje/presenterm-image'
 ```
 
 Run it:
 
 ```sh
-slide example.md
+presenterm example.md
 ```
-
-## Image support
-
-For now a basic image support is available (only `png`)
-Need to add
-
-```plain
-#```
-#~~~chafa image.png
-#placeholder text
-#~~~
-#```
-```
-
-May also have to use to make it work
-
-```plain
-#```
-#~~~chafa --format symbols image.png
-#placeholder text
-#~~~
-#```
-``````

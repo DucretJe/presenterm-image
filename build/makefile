@@ -1,8 +1,8 @@
-# Version of slides
-VERSION := v0.9.0
+# Version of presenterm
+VERSION := v0.6.1
 
 # Define the image name
-IMAGE_NAME := slides-image
+IMAGE_NAME := presenterm-image
 
 # Define the path to the Dockerfile
 DOCKERFILE_PATH := ../docker
@@ -21,7 +21,7 @@ build:
 # Test the Docker image
 test: build
 	@{ \
-	docker run --rm $(IMAGE_NAME):$(VERSION) help; \
+	docker run --rm $(IMAGE_NAME):$(VERSION) --help; \
 	EXIT_CODE=$$?; \
 	if [ $$EXIT_CODE -eq 0 ]; then \
 		echo "\033[0;32mSuccess: The command executed successfully.\033[0m"; \
