@@ -24,7 +24,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     "wget=${WGET_VER}*" && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    export ARCH=$(cat /tmp/arch) && \
+    export ARCH && \
+    ARCH=$(cat /tmp/arch) && \
     wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTERM_VER}/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" -O "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" && \
     wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTERM_VER}/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" -O "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" && \
     sed "s|presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|" "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" | sha512sum -c - && \
