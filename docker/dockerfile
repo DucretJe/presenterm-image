@@ -1,31 +1,42 @@
-FROM golang:bookworm@sha256:03082deb6ae090a0caa4e4a8f666bc59715bc6fa67f5fd109f823a0c4e1efc2a as builder
+FROM debian:bookworm@sha256:4482958b4461ff7d9fabc24b3a9ab1e9a2c85ece07b2db1840c7cbc01d053e90 as builder
+ARG TARGETPLATFORM
 
-# renovate: datasource=repology depName=debian_12/git versioning=loose
-ENV GIT_VER 2.39.2
+# Github releases
+ENV PRESENTERM_VER v0.6.1
 
-# False positive in HADOLINT, the version is pinned
-# hadolint ignore=DL3008
+# renovate: datasource=repology depName=debian_12/ca-certificates versioning=loose
+ENV CACERTIFICATES_VER 20230311
+# renovate: datasource=repology depName=debian_12/wget versioning=loose
+ENV WGET_VER 1.21.3
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN dpkgArch="$(echo "$TARGETPLATFORM" | cut -d '/' -f2)" && \
+    case "${dpkgArch##*-}" in \
+    'amd64') echo 'x86_64-unknown' > /tmp/arch ;; \
+    'arm64') echo 'aarch64-unknown' > /tmp/arch ;; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+    esac
+SHELL ["/bin/sh", "-c"]
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    "?and(?exact-name(git),?version(:${GIT_VER}))" && \
-    rm -rf /var/lib/apt/lists/*
+    ca-certificates=${CACERTIFICATES_VER} \
+    "wget=${WGET_VER}*" && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    export ARCH && \
+    ARCH=$(cat /tmp/arch) && \
+    wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTERM_VER}/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" -O "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" && \
+    wget -q "https://github.com/mfontanini/presenterm/releases/download/${PRESENTERM_VER}/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" -O "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" && \
+    sed "s|presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz|" "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz.sha512" | sha512sum -c - && \
+    tar -xf "/tmp/presenterm-${PRESENTERM_VER#v}-${ARCH}-linux-gnu.tar.gz" -C /tmp/ && \
+    mv "/tmp/presenterm-${PRESENTERM_VER#v}/presenterm" "/usr/bin/"
+SHELL ["/bin/sh", "-c"]
 
-FROM builder as build
+FROM debian:bookworm@sha256:4482958b4461ff7d9fabc24b3a9ab1e9a2c85ece07b2db1840c7cbc01d053e90
 
-ENV CGO_ENABLED=0
-RUN git clone https://github.com/maaslalani/slides.git
-WORKDIR /go/slides
-RUN go build
+COPY --from=builder /bin/presenterm /bin/presenterm
 
-FROM alpine:3@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6b as slides
+USER nobody
 
-# renovate: datasource=repology depName=alpine_3_18/chafa versioning=loose
-ENV CHAFA_VER 1.12.5
-
-RUN apk add --no-cache \
-    chafa~="${CHAFA_VER}"
-
-COPY --from=build /go/slides/slides /usr/local/bin/slides
-
-HEALTHCHECK NONE
-
-ENTRYPOINT ["/usr/local/bin/slides"]
+ENTRYPOINT ["/bin/presenterm"]

@@ -32,9 +32,20 @@
         "^build/.*makefile$"
       ],
       "matchStrings": [
-        "VERSION := (?<currentValue>.*)"
+        "VERSION (?<currentValue>.*)"
       ],
-      "depNameTemplate": "maaslalani/slides",
+      "depNameTemplate": "mfontanini/presenterm",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^docker/.*dockerfile$"
+      ],
+      "matchStrings": [
+        "ENV PRESENTERM_VER := (?<currentValue>.*)"
+      ],
+      "depNameTemplate": "mfontanini/presenterm",
       "datasourceTemplate": "github-releases"
     }
   ]
