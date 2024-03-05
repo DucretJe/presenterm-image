@@ -32,7 +32,7 @@
         "^build/.*makefile$"
       ],
       "matchStrings": [
-        "VERSION (?<currentValue>.*)"
+        "VERSION := (?<currentValue>.*)"
       ],
       "depNameTemplate": "mfontanini/presenterm",
       "datasourceTemplate": "github-releases"
