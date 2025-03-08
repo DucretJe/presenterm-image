@@ -1,5 +1,5 @@
 # Version of presenterm
-VERSION := v0.10.1
+VERSION := v0.11.0
 
 # Define the image name
 IMAGE_NAME := presenterm-image
