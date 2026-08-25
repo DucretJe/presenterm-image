@@ -1,4 +1,4 @@
-FROM debian:bookworm@sha256:731dd1380d6a8d170a695dbeb17fe0eade0e1c29f654cf0a3a07f372191c3f4b as builder
+FROM debian:trixie@sha256:f324c7ff54321e8d9c588493a20244965938ce0aa50bbd1022d38010e9ffc4b1 as builder
 ARG TARGETPLATFORM
 
 # Github releases
@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     mv "/tmp/presenterm-${PRESENTERM_VER#v}/presenterm" "/usr/bin/"
 SHELL ["/bin/sh", "-c"]
 
-FROM debian:bookworm@sha256:731dd1380d6a8d170a695dbeb17fe0eade0e1c29f654cf0a3a07f372191c3f4b
+FROM debian:trixie@sha256:f324c7ff54321e8d9c588493a20244965938ce0aa50bbd1022d38010e9ffc4b1
 
 # renovate: datasource=repology depName=debian_12/kitty versioning=loose
 ENV KITTY_VER 0.26.5
