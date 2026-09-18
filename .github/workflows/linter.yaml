@@ -7,7 +7,7 @@ on:
 jobs:
   linting:
     name: 💫 super-linter
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
